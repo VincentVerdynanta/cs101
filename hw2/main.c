@@ -46,7 +46,7 @@ int main() {
   };
   if (operator[0] == 0) {
     emp_record_t employees[100];
-    if ((fp = fopen("operator_id.bin", "r")) != NULL) fread(employees, sizeof(emp_record_t), sizeof(employees), fp);
+    if ((fp = fopen("operator_id.bin", "r")) != NULL) fread(employees, sizeof(emp_record_t), sizeof(employees) / sizeof(employees[0]), fp);
     while (id < 1 || id > 99) {
       printf("　請輸入要新増操作人員 ID（1－99）：");
       scanf("%d", &id);
@@ -57,7 +57,7 @@ int main() {
     printf("　請輸入要新増操作人員 Salary：");
     scanf("%d", &employees[id].emp_salary);
     fp = fopen("operator_id.bin", "wb+");
-    fwrite(employees, sizeof(emp_record_t), sizeof(employees), fp);
+    fwrite(employees, sizeof(emp_record_t), sizeof(employees) / sizeof(employees[0]), fp);
     fclose(fp);
     printf("　輸入完成\n");
   } else {
@@ -99,6 +99,6 @@ int main() {
     fprintf(fp, "======== csie@CGU =========\n");
     fclose(fp);
     printf("　以為您購買的 %d 組楽透組合輸出至 %s\n", slots, fn);
-  }
+  };
   return 0;
 }
